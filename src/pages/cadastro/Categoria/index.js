@@ -32,9 +32,13 @@ export default function CadastroCategoria() {
         );
     }
 
+    // para não subir em produção
     useEffect(() => {
         // o que queremos que aconteça
-        const URL_TOP = `http://localhost:8080/categorias`;
+        const URL_TOP = window.location.hostname.includes('localhost') 
+        ? 'http://localhost:8080/categorias'
+        : `https://oxeflix.herokuapp.com/categorias`;
+        
         fetch(URL_TOP)
             .then((response) => response.json())
             .then((response) => setCategoria([
