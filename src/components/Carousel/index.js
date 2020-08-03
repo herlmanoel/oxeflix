@@ -1,7 +1,6 @@
 import React from 'react';
 import { VideoCardGroupContainer, Title, ExtraLink } from './styles';
 import VideoCard from './components/VideoCard';
-// import  from 'react-slick';
 import Slider, { SliderItem } from './components/Slider';
 
 export default function Carrousel({

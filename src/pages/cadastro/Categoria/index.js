@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import FormField from '../../../components/FormField';
+import { Button } from '../../../components/Menu/components/ButtonLink';
 import PageDefault from '../../../components/PageDefault';
 
 export default function CadastroCategoria() {
@@ -31,6 +32,15 @@ export default function CadastroCategoria() {
         );
     }
 
+    useEffect(() => {
+        // o que queremos que aconteça
+        const URL_TOP = `http://localhost:8080/categorias`;
+        fetch(URL_TOP)
+            .then((response) => response.json())
+            .then((response) => setCategoria([
+                ...response,
+            ]))
+    }, []); // [] == vazio carrega só uma vez quando começar
     return (
         <PageDefault>
             <h1>Cadastro de Categoria</h1>
@@ -56,17 +66,14 @@ export default function CadastroCategoria() {
                         onChange={handleChange}
                     />
 
-                    <div>
-                        <label>
-                            Descrição
-                            <textarea
-                                name="descricao"
-                                onChange={handleChange}
-                                value={values.descricao}
-                            >
-                            </textarea>
-                        </label>
-                    </div>
+                    <FormField
+                        label="Descrição: "
+                        name="descricao"
+                        type="textarea"
+                        onChange={handleChange}
+                        value={values.descricao}
+
+                    />
 
                     <FormField
                         label="Cor: "
@@ -77,7 +84,8 @@ export default function CadastroCategoria() {
 
                     />
                 </div>
-                <button>Cadastrar</button>
+
+                <Button>Cadastrar</Button>
             </form>
 
             <ul>
